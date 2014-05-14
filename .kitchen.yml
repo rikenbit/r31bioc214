@@ -1,0 +1,23 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-12.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[ubuntu-change-source-list]
+      - recipe[apt]
+      - recipe[r31bioc214::default]
+    attributes:
+      ubuntu:
+        mirror_site_url: http://ftp.jaist.ac.jp/pub/Linux/ubuntu/
+        version: 12.04
+        need_deb_src: false
+        need_update: true
+

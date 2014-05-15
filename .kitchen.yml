@@ -12,6 +12,7 @@ suites:
   - name: default
     run_list:
       - recipe[ubuntu-change-source-list]
+      - recipe[timezone-ii]
       - recipe[apt]
       - recipe[r31bioc214::default]
     attributes:
@@ -20,4 +21,5 @@ suites:
         version: 12.04
         need_deb_src: false
         need_update: true
+      tz: "Asia/Tokyo"
 

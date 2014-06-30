@@ -1,9 +1,8 @@
 package "apt"
 #
 apt_repository "rrepository" do
-  uri "http://cran.md.tsukuba.ac.jp/bin/linux/ubuntu"
+  uri "#{node['r31bioc214']['Rapturl']}"
   distribution "precise/"
-  #components ["all"]
   keyserver "keyserver.ubuntu.com"
   key "E084DAB9"
   action :add
@@ -34,10 +33,11 @@ cookbook_file '/home/vagrant/.Renviron' do
   mode "0644"
 end
 # .Rprofile
-cookbook_file '/home/vagrant/.Rprofile' do
-  source ".Rprofile"
+template '/home/vagrant/.Rprofile' do
+  source "Rprofile.erb"
   owner "vagrant"
   group "vagrant"
+  variables cransite: node[:r31bioc214][:cransite]
   mode "0644"
 end
 

@@ -10,6 +10,9 @@ apt_repository "rrepository" do
 end
 package "r-base"
 
+# home directory
+home = "/home/"+node[:current_user]
+
 # R version check script
 cookbook_file '/home/vagrant/showversion.R' do
   source "showversion.R"
@@ -18,7 +21,7 @@ cookbook_file '/home/vagrant/showversion.R' do
   mode "0755"
 end
 # Bioconductor version check script
-cookbook_file '/home/vagrant/showBioconductorVersion.R' do
+cookbook_file "#{home}/showBioconductorVersion.R" do
   source "showBioconductorVersion.R"
   owner "vagrant"
   group "vagrant"
@@ -26,14 +29,14 @@ cookbook_file '/home/vagrant/showBioconductorVersion.R' do
 end
 
 # .Renviron
-cookbook_file '/home/vagrant/.Renviron' do
+cookbook_file "#{home}/.Renviron" do
   source ".Renviron"
   owner "vagrant"
   group "vagrant"
   mode "0644"
 end
 # .Rprofile
-template '/home/vagrant/.Rprofile' do
+template "#{home}/.Rprofile" do
   source "Rprofile.erb"
   owner "vagrant"
   group "vagrant"
@@ -42,7 +45,7 @@ template '/home/vagrant/.Rprofile' do
 end
 
 # R user library directory
-directory "/home/vagrant/R/library" do
+directory "#{home}/R/library" do
   owner "vagrant"
   group "vagrant"
   recursive true
@@ -51,7 +54,7 @@ directory "/home/vagrant/R/library" do
 end
 
 # Bioconductor install script
-cookbook_file '/home/vagrant/installBioconductor.R' do
+cookbook_file "#{home}/installBioconductor.R" do
   source "installBioconductor.R"
   owner "vagrant"
   group "vagrant"
@@ -60,6 +63,6 @@ end
 
 # install Bioconductor
 execute "install Bioconductor" do
-  command "R CMD BATCH /home/vagrant/installBioconductor.R"
+  command "R CMD BATCH #{home}/installBioconductor.R"
   action :run
 end

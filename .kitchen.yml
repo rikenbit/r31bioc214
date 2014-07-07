@@ -7,13 +7,12 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
+  - name: centos-6.4
 
 suites:
   - name: default
     run_list:
-      - recipe[ubuntu-change-source-list]
       - recipe[timezone-ii]
-      - recipe[apt]
       - recipe[r31bioc214::default]
     attributes:
       ubuntu:

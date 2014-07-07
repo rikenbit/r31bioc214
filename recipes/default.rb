@@ -1,14 +1,30 @@
-package "apt"
-#
-apt_repository "rrepository" do
-  uri "#{node['r31bioc214']['Rapturl']}"
-  distribution "precise/"
-  keyserver "keyserver.ubuntu.com"
-  key "E084DAB9"
-  action :add
-  notifies :run, "execute[apt-get update]", :immediately
+case node.platform
+when 'ubuntu', 'debian'
+  include_recipe "ubuntu-change-source-list"
+  include_recipe "apt"
+  package "apt"
+  #
+  apt_repository "rrepository" do
+    uri "#{node['r31bioc214']['Rapturl']}"
+    distribution "precise/"
+    keyserver "keyserver.ubuntu.com"
+    key "E084DAB9"
+    action :add
+    notifies :run, "execute[apt-get update]", :immediately
+  end
+  package "r-base"
+when 'centos'
+  include_recipe "yum"
+  package "yum"
+  # add the EPEL repo
+  yum_repository 'epel' do
+    description 'Extra Packages for Enterprise Linux'
+    mirrorlist 'http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=$basearch'
+    gpgkey 'http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6'
+    action :create
+  end
+  package "R"
 end
-package "r-base"
 
 # home directory
 home = "/home/"+node[:current_user]

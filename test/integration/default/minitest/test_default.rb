@@ -13,6 +13,6 @@ describe 'check Bioconductor version' do
     # develop
     #assert system('grep "Bioconductor version 3.0 (BiocInstaller 1.15.3)" showBioconductorVersion.Rout'), 'Bioconductor version is not expected version. maybe Bioconductor package is updated'
     # stable
-    assert system('grep "Bioconductor version 2.14 (BiocInstaller 1.14.2)" showBioconductorVersion.Rout'), 'Bioconductor version is not expected version. maybe Bioconductor package is updated'
+    assert system('grep "Bioconductor version 3.0 (BiocInstaller 1.16.0)" showBioconductorVersion.Rout'), 'Bioconductor version is not expected version. maybe Bioconductor package is updated'
   end
 end

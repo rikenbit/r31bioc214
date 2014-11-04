@@ -3,7 +3,7 @@ require 'minitest/autorun'
 describe 'check R version' do
   it "check R version" do
     system('R CMD BATCH showversion.R')
-    assert system('grep "R version 3.1.1 (2014-07-10) -- \"Sock it to Me\"" showversion.Rout'), 'R version is not expected version. maybe r-base package is updated'
+    assert system('grep "R version 3.1.2 (2014-10-31) -- \"Pumpkin Helmet\"" showversion.Rout'), 'R version is not expected version. maybe r-base package is updated'
   end
 end
 

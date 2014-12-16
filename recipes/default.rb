@@ -1,36 +1,37 @@
-case node.platform
-when 'ubuntu', 'debian'
-  include_recipe "ubuntu-change-source-list"
-  include_recipe "apt"
-  package "apt"
-  #
-  apt_repository "rrepository" do
-    uri "#{node['r31bioc214']['Rapturl']}"
-    distribution "precise/"
-    keyserver "keyserver.ubuntu.com"
-    key "E084DAB9"
-    action :add
-    notifies :run, "execute[apt-get update]", :immediately
-  end
-  package "r-base"
-when 'centos'
-  include_recipe "yum"
-  package "yum"
-  # add the EPEL repo
-  yum_repository 'epel' do
-    description 'Extra Packages for Enterprise Linux'
-    mirrorlist 'http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=$basearch'
-    gpgkey 'http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6'
-    action :create
-  end
-  package "R"
-end
+#case node.platform
+#when 'ubuntu', 'debian'
+#  include_recipe "ubuntu-change-source-list"
+#  include_recipe "apt"
+#  package "apt"
+#  #
+#  apt_repository "rrepository" do
+#    uri "#{node['r31bioc214']['Rapturl']}"
+#    distribution "precise/"
+#    keyserver "keyserver.ubuntu.com"
+#    key "E084DAB9"
+#    action :add
+#    notifies :run, "execute[apt-get update]", :immediately
+#  end
+#  package "r-base"
+#when 'centos'
+#  include_recipe "yum"
+#  package "yum"
+#  # add the EPEL repo
+#  yum_repository 'epel' do
+#    description 'Extra Packages for Enterprise Linux'
+#    mirrorlist 'http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=$basearch'
+#    gpgkey 'http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6'
+#    action :create
+#  end
+#  package "R"
+#end
 
 # home directory
-home = "/home/"+node[:current_user]
+#home = "/home/"+node[:current_user]
+home = "/home/vagrant"
 
 # R version check script
-cookbook_file '/home/vagrant/showversion.R' do
+cookbook_file "#{home}/showversion.R" do
   source "showversion.R"
   owner "vagrant"
   group "vagrant"
@@ -76,9 +77,18 @@ cookbook_file "#{home}/installBioconductor.R" do
   group "vagrant"
   mode "0755"
 end
+#
+#
+r_prefix_path = ""
+if node[:r31biocdev].has_key?('r_prefix_path')
+  if node[:r31biocdev][:r_prefix_path] != nil
+    r_prefix_path = node[:r31biocdev][:r_prefix_path]
+  end
+end
+
 
 # install Bioconductor
 execute "install Bioconductor" do
-  command "R CMD BATCH #{home}/installBioconductor.R"
+  command "#{r_prefix_path}R CMD BATCH #{home}/installBioconductor.R"
   action :run
 end

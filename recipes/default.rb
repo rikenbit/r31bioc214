@@ -80,9 +80,9 @@ end
 #
 #
 r_prefix_path = ""
-if node[:r31biocdev].has_key?('r_prefix_path')
-  if node[:r31biocdev][:r_prefix_path] != nil
-    r_prefix_path = node[:r31biocdev][:r_prefix_path]
+if node[:r31bioc214].has_key?('r_prefix_path')
+  if node[:r31bioc214][:r_prefix_path] != nil
+    r_prefix_path = node[:r31bioc214][:r_prefix_path]
   end
 end
 

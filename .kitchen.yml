@@ -15,7 +15,7 @@ platforms:
 
 
 suites:
-  - name: default
+  - name: r31bioc214
     run_list:
       - recipe[timezone-ii]
       - recipe[java]

@@ -15,10 +15,10 @@ platforms:
 
 
 suites:
-  - name: r31bioc214
+  - name: default
     run_list:
       - recipe[timezone-ii]
-      - recipe[java]
+      - recipe[java@1.31.0]
       - recipe[build-essential]
       - recipe[r-compiledfromsource]
       - recipe[r31bioc214::default]

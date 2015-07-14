@@ -6,14 +6,16 @@ provisioner:
   name: chef_solo
   chef_omnibus_install_options: ' -d /tmp/vagrant-cache/vagrant_omnibus'
 
-
 platforms:
   #- name: ubuntu-12.04
   - name: centos-6.5
     driver:
       vagrantfile_erb: Vagrantfile.erb
+      synced_folders:
+        - ['./result', '/tmp/result']
 
-
+busser:
+  sudo: false
 suites:
   - name: default
     run_list:
@@ -39,5 +41,3 @@ suites:
         jdk_version: 8
         oracle:
           accept_oracle_download_terms: true
-
-

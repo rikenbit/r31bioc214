@@ -1,4 +1,6 @@
-require 'minitest/autorun'
+require "minitest/autorun"
+require "minitest/reporters"
+Minitest::Reporters.use! [Minitest::Reporters::JUnitReporter.new(reports_dir="/tmp/result/junit")]
 
 describe 'check R version' do
   it "check R version" do
@@ -6,7 +8,6 @@ describe 'check R version' do
     assert system('grep "R version 3.1.2 (2014-10-31) -- \"Pumpkin Helmet\"" showversion.Rout'), 'R version is not expected version. maybe r-base package is updated'
   end
 end
-
 describe 'check Bioconductor version' do
   it "check Bioconductor version" do
     system('/usr/local/R/3.1.2/bin/R CMD BATCH showBioconductorVersion.R')

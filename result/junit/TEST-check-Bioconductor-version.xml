@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="check Bioconductor version" skipped="0" failures="0" errors="0" tests="1" assertions="1" time="0.1964897770000107">
+  <testcase name="test_0001_check Bioconductor version" classname="check Bioconductor version" assertions="1" time="0.1964897770000107">
+  </testcase>
+</testsuite>

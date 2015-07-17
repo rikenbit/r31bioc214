@@ -8,11 +8,39 @@ provisioner:
 
 platforms:
   #- name: ubuntu-12.04
-  - name: centos-6.5
+  #- name: centos-7.0
+  - name: ubuntu-14.04
     driver:
       vagrantfile_erb: Vagrantfile.erb
       synced_folders:
         - ['./result', '/tmp/result']
+    run_list:
+      - recipe[ubuntu-change-source-list]
+      - recipe[apt]
+    attributes:
+      java:
+        install_flavor: "openjdk"
+        jdk_version: 7
+      apt:
+        compile_time_update: true
+      build-essential:
+        compile_time: true
+      ubuntu:
+        mirror_site_url: "http://ftp.jaist.ac.jp/pub/Linux/ubuntu/"
+        version: "14.04"
+        need_deb_src: false
+        need_update: true
+  - name: centos-7.0
+    driver:
+      vagrantfile_erb: Vagrantfile.erb
+      synced_folders:
+        - ['./result', '/tmp/result']
+    run_list:
+      - recipe[yum]
+    attributes:
+      yum:
+        main:
+          keepcache:  True
 
 busser:
   sudo: false
@@ -20,16 +48,11 @@ suites:
   - name: default
     run_list:
       - recipe[timezone-ii]
-      - recipe[java@1.31.0]
+      - recipe[java]
       - recipe[build-essential]
       - recipe[r-compiledfromsource]
       - recipe[r31bioc214::default]
     attributes:
-      ubuntu:
-        mirror_site_url: http://ftp.jaist.ac.jp/pub/Linux/ubuntu/
-        version: 12.04
-        need_deb_src: false
-        need_update: true
       tz: "Asia/Tokyo"
       r_compiledfromsource:
         sourceurl: "ftp://ftp.stat.math.ethz.ch/Software/CRAN/src/base/R-3/R-3.1.2.tar.gz"
@@ -37,7 +60,5 @@ suites:
       r31bioc214:
         r_prefix_path: "/usr/local/R/3.1.2/bin/"
       java:
-        install_flavor: "oracle"
-        jdk_version: 8
-        oracle:
-          accept_oracle_download_terms: true
+        install_flavor: "openjdk"
+        jdk_version: 7

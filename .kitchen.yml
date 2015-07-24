@@ -15,8 +15,9 @@ platforms:
       synced_folders:
         - ['./result', '/tmp/result']
     run_list:
-      - recipe[ubuntu-change-source-list]
-      - recipe[apt]
+      - recipe[r31bioc214::change-apt]
+      #- recipe[ubuntu-change-source-list]
+      #- recipe[apt]
     attributes:
       java:
         install_flavor: "openjdk"

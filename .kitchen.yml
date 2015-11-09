@@ -56,10 +56,11 @@ suites:
     attributes:
       tz: "Asia/Tokyo"
       r_compiledfromsource:
-        sourceurl: "ftp://ftp.stat.math.ethz.ch/Software/CRAN/src/base/R-3/R-3.1.2.tar.gz"
-        install_directory: "/usr/local/R/3.1.2"
+        #sourceurl: "ftp://ftp.stat.math.ethz.ch/Software/CRAN/src/base/R-3/R-3.2.2.tar.gz"
+        sourceurl: "http://cran.ism.ac.jp/src/base/R-3/R-3.2.2.tar.gz"
+        install_directory: "/usr/local/R/3.2.2"
       r31bioc214:
-        r_prefix_path: "/usr/local/R/3.1.2/bin/"
+        r_prefix_path: "/usr/local/R/3.2.2/bin/"
       java:
         install_flavor: "openjdk"
         jdk_version: 7

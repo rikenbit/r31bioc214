@@ -57,7 +57,8 @@ suites:
       tz: "Asia/Tokyo"
       r_compiledfromsource:
         #sourceurl: "ftp://ftp.stat.math.ethz.ch/Software/CRAN/src/base/R-3/R-3.2.2.tar.gz"
-        sourceurl: "http://cran.ism.ac.jp/src/base/R-3/R-3.2.2.tar.gz"
+        #sourceurl: "http://cran.ism.ac.jp/src/base/R-3/R-3.2.2.tar.gz"
+        sourceurl: "https://stat.ethz.ch/R/daily/R-patched.tar.gz"
         install_directory: "/usr/local/R/3.2.2"
       r31bioc214:
         r_prefix_path: "/usr/local/R/3.2.2/bin/"

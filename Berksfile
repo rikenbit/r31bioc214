@@ -1,4 +1,4 @@
-source "http://api.berkshelf.com"
+source "https://supermarket.chef.io/"
 cookbook 'apt'
 cookbook 'yum'
 cookbook 'ubuntu-change-source-list', github: "ywjno/ubuntu-change-source-list"

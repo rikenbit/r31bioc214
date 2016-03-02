@@ -6,7 +6,7 @@ describe 'check R version' do
   it "check R version" do
     system('/usr/local/R/3.2.2/bin/R CMD BATCH showversion.R')
     #assert system('grep "R version 3.2.2 (2014-10-31) -- \"Pumpkin Helmet\"" showversion.Rout'), 'R version is not expected version. maybe r-base package is updated'
-    assert system('grep "R version 3.2.3 Patched" showversion.Rout'), 'R version is not expected version. maybe r-base package is updated'
+    assert system('grep "R version 3.2.4 beta" showversion.Rout'), 'R version is not expected version. maybe r-base package is updated'
   end
 end
 describe 'check Bioconductor version' do

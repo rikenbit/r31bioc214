@@ -49,7 +49,7 @@ busser:
 suites:
   - name: default
     run_list:
-      - recipe[timezone-ii]
+      - recipe[timezone_lwrp]
       - recipe[java]
       - recipe[build-essential]
       - recipe[r-compiledfromsource]
